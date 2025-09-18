@@ -9,7 +9,7 @@ engine = create_engine(
 )
 
 def init_db() -> None:
-    from models.users_model import User
+    from app.models.users_model import User
     SQLModel.metadata.create_all(engine)
 
 def get_session():

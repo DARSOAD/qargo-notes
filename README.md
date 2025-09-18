@@ -10,12 +10,13 @@ Includes:
 ### How to run with Docker
 In the project root, run
 ```bash
-docker build -t geo-processor .
+docker compose --profile prod up --build
 ```
 
 ## Technical Decisions
 
-* **MonoRepo** This project is being developed by a single developer, so a MonoRepo is sufficient and helps reduce local friction with Docker, README, and other files.
+* **MonoRepo** 
+    This project is being developed by a single developer, so a MonoRepo is sufficient and helps reduce local friction with Docker, README, and other files.
 
 📦qargo-notes
  ┣ 📂backend
@@ -25,7 +26,8 @@ docker build -t geo-processor .
 
 * ## **Backend:** #######
 
-* **FastAPI structure:** For the FastAPI I chose a lightweight layered architecture (routers, schemas, services). It keeps the code simple and testable, while allowing an easy transition to full Clean Architecture if the project scales.
+* **FastAPI structure:** 
+    For the FastAPI I chose a lightweight layered architecture (routers, schemas, services). It keeps the code simple and testable, while allowing an easy transition to full Clean Architecture if the project scales.
 
 📦backend
  ┣ 📂app
@@ -34,9 +36,15 @@ docker build -t geo-processor .
  ┃ ┣ 📂models
  ┃ ┣ 📂db
  ┃ ┣ 📂services
+ ┃ ┣ 📂dependencies
  ┃ ┣ 📂tests
  ┃ ┣ 📜errors.py
+ ┃ ┣ 📜requirements.txt
  ┃ ┗ 📜main.py
  ┗ 📜Dockerfile
 
- * **FastAPI auth:** In this authentication mock, the backend returns a fixed access_token and the associated user_id. The frontend uses user_id to link notes to the corresponding user.
+ * **FastAPI auth:** 
+    In this authentication mock, the backend returns a fixed access_token and the associated user_id. The frontend uses user_id to link notes to the corresponding user.
+
+    A simple get_user_id dependency is created, which only retrieves the ID from the header to handle multiple users.
+
